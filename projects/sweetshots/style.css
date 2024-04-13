@@ -1,0 +1,268 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+body {
+    height: 100vh;
+    width: 100vw;
+    background-image: url("img/background.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    overflow: hidden;
+}
+.slotmachine {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: calc(-643px / 2);
+    margin-top: calc(-669px / 2);
+    width: 643px;
+    height: 669px;
+}
+.slotmachine::after {
+    position: absolute;
+    content: "";
+    background-image: url("img/slotmachine2.png");
+    background-size: cover;
+    background-position: center;
+    width: 643px;
+    height: 669px;
+    top: 50%;
+    margin-top: calc(-669px / 2);
+}
+.spinRad {
+    position: absolute;
+    height: 552px;
+    width: 548px;
+    z-index: 0;
+    top: 109px;
+    left: 24px;
+    transition: 5s;
+}
+.background {
+    position: absolute;
+    width: 100%;
+    height: 300px;
+    top: 265px;
+    background-image: url("img/background.jpg");
+    background-size: 100vh 100vw;
+    background-position: center;
+}
+.slots hr {
+    position: absolute;
+    top: 50%;
+    background-color: #F4D86D;
+    height: 4px;
+    transition: 1s;
+    width: 100%;
+    border: none;
+}
+.slots hr.left {
+    left: -100%;
+    margin-top: -68px;
+}
+.slots hr.right {
+    right: -100%;
+    margin-top: 35px;
+}
+.gif {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.slots {
+    position: relative;
+    left: 50%;
+    top: 50%;
+    margin-left: -280px;
+    margin-top: -98px;
+    width: 500px;
+    height: 380px;
+    border-radius: 20px;
+    padding-right: 20px;
+    overflow: hidden;
+}
+.wheel {
+    margin-top: 30px;
+    border-radius: 20px;
+    width: 150px;
+    height: 280px;
+    /*background-color: #ffffffa6;*/
+    background: rgb(2,0,36);
+    background: linear-gradient(0deg, rgba(246, 218, 126, .5) 0%, rgba(250, 226, 167, .5) 10%, rgba(250, 250, 250, .5) 100%);
+    display: inline-block;
+    overflow: hidden;
+    text-align: center;
+}
+.wheel:nth-child(1){
+    margin-left: 16px;
+}
+.wheel:nth-child(2){
+    margin-left: 10px;
+}
+.wheel:nth-child(3){
+    margin-left: 8px;
+}
+.slot2 {
+    top: -30px;
+    height: 100px;
+    position: relative;
+    width: 100px;
+    border-radius: 50%;
+    margin: 13px auto;
+    background-size: cover;
+    background-position: center;
+}
+.title {
+    position: absolute;
+    left: 50%;
+    margin-left: -146px;
+    top: 90px;
+    z-index: 11;
+    width: 232px;
+    transition: 500ms;
+    transform: rotate(0deg);
+}
+@keyframes win {
+    0%{
+        transform: rotate(0deg);
+    }
+    25% {
+        transform: rotate(20deg);
+    }
+    75% {
+        transform: rotate(-20deg);
+    }
+    100% {
+        transform: rotate(0deg);
+    }
+}
+@keyframes spin {
+    0%{
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+.lever {
+    height: 200px;
+    position: relative;
+    top: -112px;
+    width: 68px;
+    overflow: hidden;
+    right: -574px;
+    z-index: 11;
+    transition: all 800ms, right 500ms;
+    border-bottom-left-radius: 50%;
+    border-bottom-right-radius: 50%;
+}
+.lever .img {
+    transition: 1s;
+    top: 0;
+    height: 100%;
+    position: absolute;
+    width: 100%;
+    background-image: url('img/leverHD2.svg');
+    background-size: cover;
+    background-position: center;
+}
+
+.gifList {
+    position: absolute;
+    width: 100%;
+    height: 200px;
+    top: 50%;
+    margin-top: -78px;
+}
+.gif2 {
+    display: inline-block;
+    width: 170px;
+    height: 200px;
+    position: relative;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.gif2:nth-child(1){ margin-left: 33px; }
+.gif2:nth-child(3){ margin-left: -17px; }
+
+.multi {
+    position: absolute;
+    right: 134px;
+    top: 357px;
+    height: 50px;
+    width: 50px;
+    z-index: 10;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    transform: scale(1) rotate(15deg);
+    /*transition: 1s;*/
+    /*background-color: #ff000050;*/
+}
+@keyframes bounceIn {
+    0% {
+        top: 250px;
+        transform: scale(0.8);
+    }
+    50% {
+        top: 357px;
+        transform: scale(1);
+    }
+    75% {
+        top: 340px;
+        transform: scale(1.2) rotate(10deg);
+    }
+    100% {
+        top: 357px;
+        transform: scale(1) rotate(15deg);
+    }
+
+}
+.radContainer1, .radContainer2 {
+    position: absolute;
+    overflow: hidden;
+    height: 100px;
+    /*background-color: #ff000050;*/
+    width: 100%;
+}
+.radContainer1 {top: 160px;}
+.radContainer1 .spinRad{top: -50px;}
+.radContainer2 {bottom: 0;}
+.radContainer2 .spinRad{top: -461px;}
+
+.luuk {background-image: url("img/luuk.png")}
+.jesse {background-image: url("img/jesse.png")}
+.bom {background-image: url("img/bom.png")}
+.rad {background-image: url("img/rad.png")}
+.shot {background-image: url("img/shotje.svg")}
+
+.inputs {
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+    text-align: center;
+}
+.inputs h3 {
+    color: white;
+    font-weight: bold;
+}
+
+.bonus {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 264px;
+    z-index: 10;
+    opacity: 0;
+    transition: 1s;
+    transform: scale(0);
+}

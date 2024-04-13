@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 25.2.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 35.1 100.1" style="enable-background:new 0 0 35.1 100.1;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill-rule:evenodd;clip-rule:evenodd;fill:url(#SVGID_1_);}
+	.st1{fill-rule:evenodd;clip-rule:evenodd;fill:url(#SVGID_2_);}
+	.st2{opacity:0.72;}
+	.st3{fill-rule:evenodd;clip-rule:evenodd;}
+	.st4{fill-rule:evenodd;clip-rule:evenodd;fill:#5DFEF8;}
+	.st5{fill-rule:evenodd;clip-rule:evenodd;fill:#ED6D7E;}
+	.st6{fill-rule:evenodd;clip-rule:evenodd;fill:#FFFF66;}
+</style>
+<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="14.7269" y1="66.6641" x2="20.3803" y2="66.6641">
+	<stop  offset="4.290000e-02" style="stop-color:#FDC64C"/>
+	<stop  offset="0.2626" style="stop-color:#FDFF90"/>
+	<stop  offset="0.3327" style="stop-color:#FAFA8B"/>
+	<stop  offset="0.4108" style="stop-color:#F3ED7E"/>
+	<stop  offset="0.4929" style="stop-color:#E7D768"/>
+	<stop  offset="0.5777" style="stop-color:#D5B74A"/>
+	<stop  offset="0.6638" style="stop-color:#BF9022"/>
+	<stop  offset="0.6843" style="stop-color:#B98518"/>
+	<stop  offset="0.7707" style="stop-color:#BC881A"/>
+	<stop  offset="0.8468" style="stop-color:#C79220"/>
+	<stop  offset="0.9188" style="stop-color:#D9A22B"/>
+	<stop  offset="0.9874" style="stop-color:#F2B83A"/>
+</linearGradient>
+<path class="st0" d="M20.4,96.1c0,4-5.6,4-5.6,0l0-61.9h5.6V96.1z"/>
+<radialGradient id="SVGID_2_" cx="111.0835" cy="-41.6839" r="17.1141" fx="102.604" fy="-50.1913" gradientTransform="matrix(-1.352779e-02 0.9999 0.9999 1.352779e-02 59.433 -90.7734)" gradientUnits="userSpaceOnUse">
+	<stop  offset="6.830000e-02" style="stop-color:#FFFFFF"/>
+	<stop  offset="9.170000e-02" style="stop-color:#EBEBEB"/>
+	<stop  offset="0.1568" style="stop-color:#BBBBBB"/>
+	<stop  offset="0.227" style="stop-color:#8E8E8E"/>
+	<stop  offset="0.3008" style="stop-color:#686868"/>
+	<stop  offset="0.3791" style="stop-color:#484848"/>
+	<stop  offset="0.4633" style="stop-color:#2D2D2D"/>
+	<stop  offset="0.5555" style="stop-color:#191919"/>
+	<stop  offset="0.66" style="stop-color:#0B0B0B"/>
+	<stop  offset="0.787" style="stop-color:#030303"/>
+	<stop  offset="1" style="stop-color:#000000"/>
+</radialGradient>
+<path class="st1" d="M34.6,18.3c-0.2,9.5-7.8,17.1-17.3,17c-9.5-0.1-17-7.9-16.9-17.4s7.8-17.1,17.3-17S34.7,8.9,34.6,18.3z"/>
+<g class="st2">
+	<g>
+		<path class="st3" d="M11.1,5.6L13.2,7v8.2l-2.1,1.4V5.6L11.1,5.6z M13.8,7.5l15.3,10.7l-1.9,1.3l-13.4-9.4V7.5z"/>
+		<polygon class="st4" points="13.8,7.7 29,18.2 29.1,18.1 13.8,7.5 		"/>
+		<polygon class="st4" points="11.1,5.6 11.3,5.7 11.3,16.4 11.1,16.6 		"/>
+		<polygon class="st5" points="13.8,9.8 21.7,15.3 21.5,15.5 13.8,10.1 		"/>
+		<polygon class="st5" points="23.2,16.6 23.3,16.5 27.4,19.3 27.4,19.3 27.2,19.4 		"/>
+		<polygon class="st3" points="17,13.3 19,14.7 13.2,18.4 13.2,28.4 11,29.7 11,17.3 		"/>
+		<polygon class="st4" points="11.3,29.5 11,29.7 11,17.3 11.3,17.1 		"/>
+		<polygon class="st5" points="18.8,14.6 19,14.7 13.2,18.4 13.2,18.1 		"/>
+		<polygon class="st6" points="17,13.3 17.2,13.5 11,17.6 11,17.3 		"/>
+		<polygon class="st3" points="21.8,15.3 23.7,16.5 13.8,23 13.8,20.3 		"/>
+		<polygon class="st6" points="14,22.9 13.8,23 13.8,20.3 14,20.2 		"/>
+		<polygon class="st5" points="23.5,16.6 13.8,23 13.8,22.7 23.3,16.5 		"/>
+		<polygon class="st3" points="24.6,18.6 26.4,19.8 13.8,28.1 13.8,25.6 		"/>
+		<polygon class="st6" points="26.2,19.7 26.4,19.8 13.8,28.1 13.8,27.8 13.8,27.8 26.2,19.7 		"/>
+	</g>
+</g>
+</svg>

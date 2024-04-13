@@ -1,0 +1,31 @@
+:root {
+    --gameWidth: 500px;
+    --gameHeight: 500px
+}
+* {
+    box-sizing: border-box;
+}
+.game {
+    position: relative;
+    height: var(--gameHeight);
+    width: var(--gameWidth);
+    background-color: gray;
+    padding: 1em;
+}
+
+.tile {
+    --gap: 1em;
+    --width: calc((var(--gameWidth) - var(--gap) * 5) / 4);
+    --height: calc((var(--gameHeight) - var(--gap) * 5) / 4);
+    --x: 0;
+    --y: 0;
+    --number: 0;
+    position: absolute;
+    left: calc(var(--gap) + (var(--x) * ( var(--width) + var(--gap) )));
+    top: calc(var(--gap) + (var(--y) * ( var(--height) + var(--gap) )));
+    height: var(--height);
+    width: var(--width);
+    text-align: center;
+    background-color: hsl(calc(360 - var(--number)), 100%, 50%);
+    transition: all 1s;
+}

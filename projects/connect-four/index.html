@@ -1,0 +1,128 @@
+<html>
+
+<head>
+    <title>Tic tac toe</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            width: 100vw;
+            height: 100vh;
+            background-color: rgb(200, 200, 200);
+            display: grid;
+            place-items: center;
+            position: relative;
+        }
+
+        #reset {
+            position: fixed;
+            padding: .5em;
+            top: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        canvas {
+            position: absolute;
+        }
+    </style>
+</head>
+
+<body>
+    <button id='reset'>Reset</button>
+    <canvas id="discs"></canvas>
+    <canvas id="bord"></canvas>
+    <script src="connectFour.js"></script>
+    <script src="bord.js"></script>
+    <script src="disc.js"></script>
+    <script>
+        var rows = new Array(7);
+        var bord = new Bord();
+        bord.draw();
+        for (let i = 0; i < rows.length; i++) {
+            rows[i] = [];
+        }
+
+        var player = true;
+
+        document.getElementById('reset').addEventListener('click', function () {
+            rows.forEach(r => {
+                r.forEach(c => {
+                    c.clear();
+                })
+            })
+            setTimeout(function() {
+                rows.forEach(r => {
+                    for(let i = r.length;i >= 0; i --) {
+                        r.splice(i, 1);
+                    }
+                });
+                console.log('clear');
+            }, 1000)
+            player = true;
+        })
+
+
+        draw = function () {
+            ctx.fillStyle = "rgb(0, 0, 51)";
+            ctx.fillRect(0, 0, c.width, c.height);
+
+            for (let i = rows.length - 1; i >= 0; i--) {
+                for (let j = 0; j < rows[i].length; j++) {
+                    rows[i][j].update();
+                }
+            }
+            window.requestAnimationFrame(draw)
+        }
+        draw();
+
+        function drawLine(x1, y1, x2, y2) {
+            ctx.beginPath();
+            ctx.strokeStyle = 'red';
+            ctx.lineWidth = 8;
+            ctx.moveTo(x1, y1);
+            ctx.lineTo(x2, y2);
+            ctx.closePath();
+            ctx.stroke();
+        }
+        document.getElementById('bord').addEventListener('click', function (e) {
+            let x = e.layerX;
+            switch (true) {
+                case (x < s * 1):
+                    addToRow(0);
+                    break;
+                case (x < s * 2):
+                    addToRow(1);
+                    break;
+                case (x < s * 3):
+                    addToRow(2);
+                    break;
+                case (x < s * 4):
+                    addToRow(3);
+                    break;
+                case (x < s * 5):
+                    addToRow(4);
+                    break;
+                case (x < s * 6):
+                    addToRow(5);
+                    break;
+                case (x < s * 7):
+                    addToRow(6);
+                    break;
+            }
+
+        })
+        function addToRow(row) {
+            if (rows[row].length >= 6) return;
+            let color = player ? 'red' : 'yellow';
+            let o = s / 2;
+            rows[row].push(new Disc(s * (row + 1) - o, row, color));
+            player = !player;
+        }
+    </script>
+</body>
+
+</html>

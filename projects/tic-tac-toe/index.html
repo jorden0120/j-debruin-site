@@ -1,0 +1,140 @@
+<html>
+
+<head>
+    <title>Tic tac toe</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            width: 100vw;
+            height: 100vh;
+            background-color: rgb(200, 200, 200);
+            display: grid;
+            place-items: center;
+        }
+
+        #reset {
+            position: fixed;
+            padding: .5em;
+            top: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+    </style>
+</head>
+
+<body>
+    <button id='reset'>Reset</button>
+    <canvas id="ttt"></canvas>
+    <script src="tictactoe.js"></script>
+    <script>
+        var gap = 20;
+        var size = Math.floor((ctx.canvas.width - (gap * 2)) / 3);
+        var blocks = [];
+        for (let x = 0; x < 3; x++) {
+            for (let y = 0; y < 3; y++) {
+                blocks.push(new Block(x * size + gap, y * size + gap, size, size));
+            }
+        }
+        for (let x = 0; x < 9; x++) {
+            blocks[x].draw();
+        }
+
+        var speler1 = true;
+
+        document.getElementById('ttt').addEventListener('click', function (e) {
+            var x = e.clientX - e.currentTarget.offsetLeft;
+            var y = e.clientY - e.currentTarget.offsetTop;
+            // let x = e.layerX;
+            // let y = e.layerY;
+            // console.log(e.layerX);
+            let block = blocks.find(b => {
+                return x > b.x && y > b.y && x < b.x + b.size && y < b.y + b.size
+            });
+            if (block) {
+                if (block.state !== -1) return;
+                if (speler1) {
+                    block.drawX();
+                    speler1 = !speler1;
+                    checkWin(1);
+                } else {
+                    block.drawO();
+                    speler1 = !speler1;
+                    checkWin(0);
+                }
+            }
+
+        })
+        document.getElementById('reset').addEventListener('click', function () {
+            for (let x = 0; x < 9; x++) {
+                blocks[x].draw();
+                blocks[x].state = -1;
+            }
+            speler1 = true;
+        })
+
+        checkWin = function (state) {
+            switch (true) {
+                case (blocks[0].state === state && blocks[3].state === state && blocks[6].state === state): // top
+                    drawLine(blocks[0].x, blocks[0].y + size / 2, blocks[6].x + size, blocks[6].y + size / 2);
+                    break;
+                case (blocks[0].state === state && blocks[1].state === state && blocks[2].state === state): // left
+                    drawLine(blocks[0].x + size / 2, blocks[0].y, blocks[2].x + size / 2, blocks[2].y + size);
+                    break;
+                case (blocks[0].state === state && blocks[4].state === state && blocks[8].state === state): // ltc > rbc
+                    drawLine(blocks[0].x + 5, blocks[0].y + 5, blocks[8].x + size - 5, blocks[8].y + size - 5);
+                    break;
+                case (blocks[2].state === state && blocks[4].state === state && blocks[6].state === state): // rtc > lbc
+                    drawLine(blocks[2].x + 5, blocks[2].y + size - 5, blocks[6].x + size - 5, blocks[6].y + 5);
+                    break;
+                case (blocks[6].state === state && blocks[7].state === state && blocks[8].state === state): // right
+                    drawLine(blocks[6].x + size / 2, blocks[6].y, blocks[8].x + size / 2, blocks[8].y + size);
+                    break;
+                case (blocks[2].state === state && blocks[5].state === state && blocks[8].state === state): // bottom
+                    drawLine(blocks[2].x, blocks[2].y + size / 2, blocks[8].x + size, blocks[8].y + size / 2);
+                    break;
+                case (blocks[3].state === state && blocks[4].state === state && blocks[5].state === state): // mv
+                    drawLine(blocks[3].x + size / 2, blocks[3].y, blocks[5].x + size / 2, blocks[5].y + size);
+                    break;
+                case (blocks[1].state === state && blocks[4].state === state && blocks[7].state === state): // mh
+                    drawLine(blocks[1].x, blocks[1].y + size / 2, blocks[7].x + size, blocks[7].y + size / 2);
+                    break;
+            }
+        }
+        function drawLine(x1, y1, x2, y2) {
+            ctx.beginPath();
+            ctx.strokeStyle = 'red';
+            ctx.lineWidth = 8;
+            ctx.moveTo(x1, y1);
+            ctx.lineTo(x2, y2);
+            ctx.closePath();
+            ctx.stroke();
+        }
+        var keys = [2,5,8,1,4,7,0,3,6];
+        document.addEventListener('keypress', function (e) {
+            let key = parseInt(e.key)
+            if(key < 0 || key > 9) return;
+            let block = blocks[ keys[key - 1]];
+            if (block) {
+                if (block.state !== -1) return;
+                if (speler1) {
+                    block.drawX();
+                    speler1 = !speler1;
+                    checkWin(1);
+                } else {
+                    block.drawO();
+                    speler1 = !speler1;
+                    checkWin(0);
+                }
+            }
+
+        })
+
+
+    </script>
+</body>
+
+</html>

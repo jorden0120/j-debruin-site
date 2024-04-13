@@ -1,0 +1,17 @@
+[
+    {
+        "answer": "imei",
+        "chances": 8,
+        "won": false,
+        "givenAnswers": [
+            "iets",
+            "ijke",
+            "ilen",
+            "iper",
+            "ibem",
+            "imeg",
+            "imef",
+            "imec"
+        ]
+    }
+]

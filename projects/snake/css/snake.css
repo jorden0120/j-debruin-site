@@ -1,0 +1,94 @@
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    background-image: url("../img/arcadeBackground.jpg");
+    background-position: center;
+    background-size: cover;
+}
+#snake {
+    background-color: #80808080;
+}
+.game {
+    position: relative;
+    text-align: center;
+    height: 600px;
+    background-color: #d3d3d3;
+    border-radius: 20px;
+}
+.gameOver {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 66px;
+    left: 33px;
+    width: 220px;
+    height: 220px;
+    background-color: #ffffff50;
+}
+.start {
+    width: 80%;
+    border-radius: 10px;
+    height: 50px;
+    color: white;
+    font-weight: bold;
+    font-size: 15pt;
+    background-color: aqua;
+}
+.start:hover {
+    opacity: 0.5;
+}
+.controls {
+    margin-top: 30px;
+    position: relative;
+    height: 170px;
+    width: 170px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.controls > .input {
+    color: gray;
+    border-radius: 20%;
+    position: absolute;
+    border: 1px solid black;
+}
+#up {top: 10px;}
+#down {bottom: 10px;}
+#up, #down {
+    height: 60px;
+    width: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+#left {left: 10px;}
+#right {right: 10px;}
+#left, #right {
+    height: 30px;
+    width: 60px;
+    top: 50%;
+    transform: translatey(-50%);
+}
+#up > span {position: absolute; transform: translateX(-50%); left: 50%; top: 0;}
+#down > span {position: absolute; transform: translateX(-50%) rotate(180deg); left: 50%; bottom: 0;}
+#left > span {position: absolute; transform: translatey(-50%) rotate(270deg); top: 50%; left: 0;}
+#right > span {position: absolute; transform: translatey(-50%) rotate(90deg); top: 50%; right: 0;}
+
+@media only screen and (max-width: 1000px) {
+    #snake {
+        width: 80%;
+    }
+    .game {
+        width: 100vw;
+        height: 100vh !important;
+    }
+    .controls {
+        margin-top: 500px;
+        transform: translateX(-50%) scale(4);
+
+    }
+}

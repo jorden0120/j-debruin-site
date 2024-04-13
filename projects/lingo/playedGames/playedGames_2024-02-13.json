@@ -1,0 +1,24 @@
+[
+    {
+        "answer": "dar",
+        "chances": 2,
+        "won": false,
+        "givenAnswers": [
+            "dak",
+            "da;"
+        ]
+    },
+    {
+        "answer": "soek",
+        "chances": 8,
+        "won": true,
+        "givenAnswers": [
+            "saus",
+            "stop",
+            "stro",
+            "sold",
+            "sock",
+            "soek"
+        ]
+    }
+]

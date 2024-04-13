@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sweet shots</title>
+    <meta property="og:site_name" content="j-debruin.nl">
+    <meta property="og:url" content="https://j-debruin.nl/sweetshots">
+    <meta property="og:image" content="https://j-debruin.nl/sweetshots/img/sweetshotsImg.png">
+    <meta property="og:title" content="Sweetshots">
+    <meta property="og:image:width" content="300">
+    <meta property="og:image:height" content="300">
+    <meta property="og:description" content="een slotsmachine genaamt Sweetshots :)">
+    <link rel="icon" href="./img/shotje.svg"/>
+    <link rel="stylesheet" type="text/css" href="./style.css?v=1.0">
+</head>
+<body>
+<div class="slotmachine">
+    <div class="radContainer1">
+        <img src="./img/losRad.png" class="spinRad">
+    </div>
+    <div class="radContainer2">
+        <img src="./img/losRad.png" class="spinRad">
+    </div>
+
+    <img src="./img/sweetshots.png" class="title">
+    <div class="gif"></div>
+    <div class="slots">
+        <div id="wheel1" class="wheel"></div>
+        <div id="wheel2" class="wheel"></div>
+        <div id="wheel3" class="wheel"></div>
+                <hr class="left">
+        <img class="bonus" src="./img/bonus2.png">
+                <hr class="right">
+    </div>
+    <div class="lever">
+        <div class="img"></div>
+    </div>
+    <div class="gifList">
+        <div class="gif2"></div>
+        <div class="gif2"></div>
+        <div class="gif2"></div>
+    </div>
+    <div class="multi" style="opacity: 0%">
+
+    </div>
+</div>
+<div class="inputs">
+    <h3>Volume</h3>
+    <input type="range" min="1" max="100" value="100" class="slider" id="volume">
+</div>
+<footer>
+    <script src="jquery3.6.0.min.js"></script>
+    <script src="slots.js?v=1.0"></script>
+</footer>
+</body>
+</html>
