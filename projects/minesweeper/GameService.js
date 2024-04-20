@@ -1,4 +1,4 @@
-import GameState from "./gameState.js";
+import GameState from "./GameState.js";
 import Game from "./minesweeper/Game.js";
 import Tile from "./minesweeper/Tile.js";
 

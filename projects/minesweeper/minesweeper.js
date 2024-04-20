@@ -1,5 +1,5 @@
 import gameService from "./GameService.js";
-import GameState from "./gameState.js";
+import GameState from "./GameState.js";
 
 /**
  * @type {Element}
