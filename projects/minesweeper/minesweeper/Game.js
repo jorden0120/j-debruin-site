@@ -124,6 +124,7 @@ export default class Game {
     updateGameState() {
         if(this.tiles.some(t => t.isBomb && !t.isHidden)) {
             this.endGame();
+            return;
         }
 
         if(this.tiles.every(tile => !tile.isHidden || tile.isBomb)) {

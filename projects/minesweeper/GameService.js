@@ -43,6 +43,11 @@ class GameService {
         return new GameState(game);
     }
 
+    /**
+     * 
+     * @param {int} gameId 
+     * @returns 
+     */
     async getGameState(gameId) {
         const game = this.#runningGames.find(g => g.id === gameId);
         if(!game) {

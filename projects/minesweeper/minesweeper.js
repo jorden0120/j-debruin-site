@@ -107,8 +107,14 @@ const flagTile = (clickEvent) => {
     ).then(gameState => updateGame(gameState, tile));
 }
 
-
-
+/**
+ * 
+ * @param {int} x1 
+ * @param {int} y1 
+ * @param {int} x2 
+ * @param {int} y2 
+ * @returns 
+ */
 
 function calculateDistance(x1, y1, x2, y2) {
     return Math.abs(x2 - x1) + Math.abs(y2 - y1);
@@ -145,7 +151,5 @@ const updateMap = async (gameState, centerX, centerY) => {
     });
 
     gameState.map = [];
-
-    const test = JSON.stringify(gameState, null, '\n').replaceAll('\n\n', '\n');
-    document.querySelector('#game-state').innerHTML = test;
+    document.querySelector('#game-state').innerHTML = JSON.stringify(gameState, null, '\n').replaceAll('\n\n', '\n');
 }

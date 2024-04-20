@@ -70,7 +70,6 @@
         
         grid-template-rows: repeat(var(--height), var(--columns-size));
         grid-template-columns: repeat(var(--width), var(--columns-size));
-        /* aspect-ratio: var(--width) / var(--height); */
         grid-auto-flow: column;
         box-shadow: inset 0 0 2px 5px var(--map-border-color);
         background-color: var(--map-border-color);
@@ -103,6 +102,11 @@
     .tile.flaged {
         --flaged-background: red;
         background: var(--flaged-background);
+    }
+
+    .json-string {
+        overflow: hidden;
+        width: 100%;
     }
 
     @media only screen and (orientation: portrait) {
@@ -138,10 +142,5 @@
         .game-inf pre {
             display: none;
         }
-    }
-
-    .json-string {
-        overflow: hidden;
-        width: 100%;
     }
 }
