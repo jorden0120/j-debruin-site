@@ -5,9 +5,9 @@ import Tile from "./minesweeper/Tile.js";
 class GameService {
     #runningGames = [];
     /**
-     * 
      * @param {int} gameId 
-     * @param {Tile} tile 
+     * @param {int} tileX 
+     * @param {int} tileY 
      * @returns {Tile[]}
      */
     async getResult(gameId, tileX, tileY) {
@@ -19,10 +19,25 @@ class GameService {
     }
 
     /**
+     * @param {int} gameId 
+     * @param {int} tileX 
+     * @param {int} tileY 
+     * @param {boolean} flagged 
+     * @returns {Tile[]}
+     */
+    async setFlagTile(gameId, tileX, tileY, flagged) {
+        const game = this.#runningGames.find(g => g.id === parseInt(gameId));
+
+        game.toggleFlagTile(toBase10(tileX), toBase10(tileY), !!flagged);
+
+        return new GameState(game);
+    }
+
+    /**
      *  @returns {Promise<GameState>}
      */
     async startGame(width, height, bombsAmount) {
-        const game = new Game(width, height, bombsAmount);
+        const game = new Game(toBase10(width), toBase10(height), toBase10(bombsAmount));
 
         this.#runningGames.push(game);
         return new GameState(game);

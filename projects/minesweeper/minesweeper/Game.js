@@ -11,7 +11,15 @@ export default class Game {
     height = 0;
     width = 0;
     bombs = 20;
+    won = false;
+    ended = false;
 
+    /**
+     * 
+     * @param {int} width 
+     * @param {int} height 
+     * @param {int} bombs 
+     */
     constructor(width, height, bombs) {
         this.id = Game.#getNewId();
         this.height = height;
@@ -32,6 +40,10 @@ export default class Game {
     }
 
     #plantBombs() {
+        if(this.bombs > this.tiles.length) {
+            this.bombs = this.tiles.length;    
+        }
+
         for(let i = 0; i < this.bombs; i++) {
             const tilesToChoose = this.tiles.filter(t => !t.isBomb);
             const index = Math.floor(Math.random() * tilesToChoose.length);
@@ -41,18 +53,7 @@ export default class Game {
 
     #calculateTileScores() {
         this.tiles.forEach(tile => {
-            const score = this.tiles.filter(t => t.isBomb && (
-                   t.x === tile.x - 1  && t.y === tile.y
-                || t.x === tile.x - 1  && t.y === tile.y + 1
-                || t.x === tile.x - 1  && t.y === tile.y - 1
-
-                || t.x === tile.x + 1  && t.y === tile.y
-                || t.x === tile.x + 1  && t.y === tile.y + 1
-                || t.x === tile.x + 1  && t.y === tile.y - 1
-
-                || t.x === tile.x      && t.y === tile.y + 1
-                || t.x === tile.x      && t.y === tile.y - 1
-            )).length;
+            const score = this.getAllTilesAroundTile(this.tiles, tile).filter(t => t.isBomb).length;
             
             tile.setScore(score);
         });
@@ -67,29 +68,76 @@ export default class Game {
         return this.tiles.filter(t => !t.isHidden);
     }
 
+    toggleFlagTile(tileX, tileY, flagged) {
+        const tile = this.tiles.find(t => t.isHidden && t.x === tileX && t.y === tileY);
+        tile.setFlaged(flagged);
+    }
+
     openTile(tileX, tileY) {
         const tileToOpen = this.tiles.find(t => t.isHidden && t.x === tileX && t.y === tileY);
-        tileToOpen?.reveal();
-        if(tileToOpen?.isBomb) {
+        const tilesToSearch = [...this.tiles];
+        if (!tileToOpen || tileToOpen.isflaged) {
             return;
-        }
-
-        if(tileToOpen?.score > 0) {
-            return;
-        }
-
-        this.tiles.filter(t => t.isHidden && (
-                (t.x === tileX      && t.y === tileY + 1)
-            ||  (t.x === tileX      && t.y === tileY - 1)
-            ||  (t.x === tileX + 1  && t.y === tileY)
-            ||  (t.x === tileX - 1  && t.y === tileY)
-        )).forEach(tile => {
-            if(tile.score === 0) {
-                this.openTile(tile.x, tile.y);
-            } else {
-                tile.reveal();
+        }    
+    
+        const stack = [tileToOpen];
+        while (stack.length > 0) {
+            const currentTile = stack.pop();
+            currentTile.reveal();
+            
+            if (currentTile.isBomb || currentTile.score > 0) {
+                continue;
             }
-        });
+            
+            const tilesAround = this.getAllTilesAroundTile(tilesToSearch, currentTile).filter(t => t.isHidden && !t.isflaged);
+            tilesAround.forEach(tile => {
+                if (tile.score === 0) {
+                    tilesToSearch.splice(tilesToSearch.indexOf(tile), 1);
+                    stack.push(tile);
+                } else {
+                    tile.reveal();
+                }
+            });
+        }
+
+        this.updateGameState();
+    }
+
+    getAllTilesAroundTile(list, tile) {
+        if (!tile) return [];
+    
+        const { x, y } = tile;
+        const tilesAround = [];
+        for (let i = x - 1; i <= x + 1; i++) {
+            for (let j = y - 1; j <= y + 1; j++) {
+                if (i !== x || j !== y) {
+                    const foundTile = list.find(t => t.x === i && t.y === j);
+                    if (foundTile) {
+                        tilesAround.push(foundTile);
+                    }
+                }
+            }
+        }
+        return tilesAround;
+    }
+
+    updateGameState() {
+        if(this.tiles.some(t => t.isBomb && !t.isHidden)) {
+            this.endGame();
+        }
+
+        if(this.tiles.every(tile => !tile.isHidden || tile.isBomb)) {
+            this.endGame(true);
+        }
+    }
+
+    endGame(won = false) {
+        this.won = won;
+        this.ended = true;
+    }
+
+    getBombRemaining() {
+        return this.bombs - this.tiles.filter(t => t.isflaged).length;
     }
 
     static #getNewId() {

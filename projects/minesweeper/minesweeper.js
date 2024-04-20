@@ -11,16 +11,23 @@ let gameMap;
  */
 let gameId;
 
+let drawingEvents = [];
+
 document.addEventListener('DOMContentLoaded', () => {
     gameMap = document.querySelector('#game-map');
-
+    document.querySelector('#start-game').addEventListener('click', startGame);
     startGame();
 });
 
 const startGame = async () => {
-    const width = 10;
-    const height = 10;
-    const bombsAmount = 15;
+    gameMap.addEventListener('click', openTile);
+    gameMap.addEventListener('contextmenu', flagTile);
+
+    const width = parseInt(document.querySelector('#size').value);
+    const height = parseInt(document.querySelector('#size').value);
+    const bombsAmount = parseInt(document.querySelector('#total-bombs').value);
+    drawingEvents.forEach(e => clearTimeout(e));
+
 
     gameMap.style.setProperty('--rows', width);
 
@@ -31,7 +38,10 @@ const startGame = async () => {
         }
     }
 
-    gameId = (await gameService.startGame(width, height, bombsAmount)).gameId;
+    const gameState = await gameService.startGame(width, height, bombsAmount);
+    gameId = gameState.gameId;
+    document.querySelectorAll('.bombs').forEach(e => e.innerText = gameState.bombsRemaining)
+    drawingEvents = [];
 }
 
 /**
@@ -46,29 +56,87 @@ const createTile = (x, y) => {
     tile.setAttribute('data-x', x);
     tile.setAttribute('data-y', y);
 
-    tile.addEventListener('click', openTile);
-
     return tile;
 }
 
+/**
+ * 
+ * @param {PointerEvent} clickEvent 
+ */
 const openTile = (clickEvent) => {
-    const tile = clickEvent.currentTarget;
+    const tile = clickEvent.target.closest('.tile');
+    if (!tile) return;
 
     gameService.getResult(gameId, 
         tile.getAttribute('data-x'), 
         tile.getAttribute('data-y')
-    ).then(gameState => updateMap(gameState));
+    ).then(gameState => updateGame(gameState, tile));
 }
 
 /**
  * 
  * @param {GameState} gameState 
  */
-const updateMap = (gameState) => {
-    gameState.map.forEach(tile => {
-        const tileElement = gameMap.querySelector(`[data-x="${tile.x}"][data-y="${tile.y}"]`);
-        const value = tile.isBomb ? 'B' : tile.score;
-        tileElement.setAttribute('data-value', value);
-        tileElement.classList.add('opened')
+const updateGame = (gameState, tileElement) => {
+    updateMap(gameState, tileElement.getAttribute('data-x'),  tileElement.getAttribute('data-y'));
+    document.querySelectorAll('.bombs').forEach(e => e.innerText = gameState.bombsRemaining)
+}
+
+/**
+ * 
+ * @param {PointerEvent} clickEvent 
+ */
+const flagTile = (clickEvent) => {
+    clickEvent.preventDefault();
+    const tile = clickEvent.target.closest('.tile');
+    if (!tile) return;
+
+    tile.classList.toggle('flaged');
+    let flaged = tile.classList.contains('flaged');
+
+    gameService.setFlagTile(gameId, 
+        tile.getAttribute('data-x'), 
+        tile.getAttribute('data-y'),
+        flaged
+    ).then(gameState => updateGame(gameState, tile));
+}
+
+
+
+
+function calculateDistance(x1, y1, x2, y2) {
+    return Math.abs(x2 - x1) + Math.abs(y2 - y1);
+}
+
+/**
+ * 
+ * @param {Tile[]} array 
+ * @param {int} centerX 
+ * @param {int} centerY 
+ */
+const sortToOuter = (array, centerX, centerY) => {
+    array.forEach(t => t.distance = calculateDistance(centerX, centerY, t.x, t.y))
+    array.sort((a, b) =>  a.distance - b.distance);
+}
+
+/**
+ * 
+ * @param {GameState} gameState 
+ */
+const updateMap = async (gameState, centerX, centerY) => {
+    sortToOuter(gameState.map, centerX, centerY);
+    gameState.map.forEach((tile) => {
+        const event = setTimeout(() => {
+            const tileElement = gameMap.querySelector(`[data-x="${tile.x}"][data-y="${tile.y}"]`);
+            const value = tile.isBomb ? 'B' : tile.score > 0 ? tile.score : '';
+            tileElement.setAttribute('data-value', value);
+            tileElement.classList.add('opened')
+            tileElement.removeEventListener('click', openTile);
+            tileElement.removeEventListener('contextmenu', flagTile);
+        }, tile.distance * 10 + Math.random() * 10);
+
+        drawingEvents.push(event);
     });
+
+    console.log(gameState);
 }

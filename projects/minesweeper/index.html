@@ -3,6 +3,14 @@
     <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-    <div class="map" id="game-map"></div>
+    <div class="game-wrapper">
+        <div class="action-bar">
+            <button id="start-game">Start game</button>
+            <span>Bomb left: <span class="bombs"></span></span>
+            <label for="totalBombs">Total bombs: <input id="total-bombs" value="30" type="number" inputmode="numeric" pattern="\d*"></label>
+            <label for="totalBombs">Size: <input id="size" value="20" type="number" inputmode="numeric" pattern="\d*"></label>
+        </div>
+        <div class="map" id="game-map"></div>
+    </div>
     <script type="module" src="./minesweeper.js"></script>
 </body>

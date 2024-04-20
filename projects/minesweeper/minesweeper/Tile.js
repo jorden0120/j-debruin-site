@@ -1,6 +1,7 @@
 export default class Tile {
     isBomb = false;
     isHidden = true;
+    isflaged = false;
     score = -1;
     x = 0;
     y = 0;
@@ -19,5 +20,9 @@ export default class Tile {
         if(!this.isBomb) {
             this.score = score;
         }
+    }
+
+    setFlaged(flagged) {
+        this.isflaged = flagged;
     }
 }
