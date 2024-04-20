@@ -5,10 +5,16 @@
 <body>
     <div class="game-wrapper">
         <div class="action-bar">
-            <button id="start-game">Start game</button>
-            <span>Bomb left: <span class="bombs"></span></span>
-            <label for="totalBombs">Total bombs: <input id="total-bombs" value="30" type="number" inputmode="numeric" pattern="\d*"></label>
-            <label for="totalBombs">Size: <input id="size" value="20" type="number" inputmode="numeric" pattern="\d*"></label>
+            <div class="game-settings">
+                <label for="totalBombs">Total bombs: <input id="total-bombs" value="30" type="number" inputmode="numeric" pattern="\d*"></label>
+                <label for="totalBombs">Width: <input id="width" value="20" type="number" inputmode="numeric" pattern="\d*"></label>
+                <label for="totalBombs">Height: <input id="height" value="20" type="number" inputmode="numeric" pattern="\d*"></label>
+            </div>
+            <div class="game-inf">
+                <span>Bomb left: <span class="bombs"></span></span>
+                <pre id="game-state" class="json-string"></pre>
+            </div>
+            <button id="start-game" class="start-button">Start game</button>
         </div>
         <div class="map" id="game-map"></div>
     </div>

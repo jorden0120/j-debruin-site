@@ -23,15 +23,20 @@ const startGame = async () => {
     gameMap.addEventListener('click', openTile);
     gameMap.addEventListener('contextmenu', flagTile);
 
-    const width = parseInt(document.querySelector('#size').value);
-    const height = parseInt(document.querySelector('#size').value);
+    const width = parseInt(document.querySelector('#width').value);
+    const height = parseInt(document.querySelector('#height').value);
     const bombsAmount = parseInt(document.querySelector('#total-bombs').value);
     drawingEvents.forEach(e => clearTimeout(e));
+    await new Promise((resolve) => {
+        gameMap.style.setProperty('--columns-size', Math.floor(Math.min((gameMap.clientWidth - 1) / width, (gameMap.clientHeight - 1) / height)) + 'px');
+        gameMap.style.setProperty('--width', width);
+        gameMap.style.setProperty('--height', height);
+        gameMap.style.setProperty('--mapHeight', gameMap.clientHeight);
+        gameMap.style.setProperty('--mapWidth', gameMap.clientWidth);
+        gameMap.innerHTML = '';
+        resolve();
+    });
 
-
-    gameMap.style.setProperty('--rows', width);
-
-    gameMap.innerHTML = '';
     for(let x = 0; x < width; x++) {
         for(let y = 0; y < height; y++) {
             gameMap.appendChild(createTile(x, y));
@@ -43,6 +48,7 @@ const startGame = async () => {
     document.querySelectorAll('.bombs').forEach(e => e.innerText = gameState.bombsRemaining)
     drawingEvents = [];
 }
+
 
 /**
  * 
@@ -88,7 +94,7 @@ const updateGame = (gameState, tileElement) => {
  */
 const flagTile = (clickEvent) => {
     clickEvent.preventDefault();
-    const tile = clickEvent.target.closest('.tile');
+    const tile = clickEvent.target.closest('.tile:not(.opened)');
     if (!tile) return;
 
     tile.classList.toggle('flaged');
@@ -138,5 +144,8 @@ const updateMap = async (gameState, centerX, centerY) => {
         drawingEvents.push(event);
     });
 
-    console.log(gameState);
+    gameState.map = [];
+
+    const test = JSON.stringify(gameState, null, '\n').replaceAll('\n\n', '\n');
+    document.querySelector('#game-state').innerHTML = test;
 }

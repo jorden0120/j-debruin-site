@@ -1,0 +1,33 @@
+@layer default {
+    .tile[data-value="1"] {
+        color: rgb(0, 125, 250);
+    }
+
+    .tile[data-value="2"] {
+        color: rgb(0, 0, 250);
+    }
+
+    .tile[data-value="3"] {
+        color: rgb(237, 250, 0);
+    }
+
+    .tile[data-value="4"] {
+        color: rgb(0, 250, 50);
+    }
+
+    .tile[data-value="5"] {
+        color: rgb(250, 121, 0);
+    }
+
+    .tile[data-value="6"] {
+        color: rgb(96, 0, 250);
+    }
+
+    .tile[data-value="7"] {
+        color: rgb(250, 40, 0);
+    }
+
+    .tile[data-value="8"] {
+        color: rgb(250, 0, 0);
+    }
+}
